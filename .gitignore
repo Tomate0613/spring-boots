@@ -1,0 +1,9 @@
+run
+.gradle
+.idea
+
+build
+
+testing
+
+src/main/generated/.cache/

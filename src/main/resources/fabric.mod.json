@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "spring_boots",
+  "version": "${version}",
+  "name": "Spring Boots",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/spring_boots/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "fabric-datagen": [
+      "dev.doublekekse.spring_boots.client.SpringBootsDataGenerator"
+    ],
+    "client": [
+      "dev.doublekekse.spring_boots.client.SpringBootsClient"
+    ],
+    "main": [
+      "dev.doublekekse.spring_boots.SpringBoots"
+    ]
+  },
+  "mixins": [
+    "spring_boots.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}

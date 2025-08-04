@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "dev.doublekekse.spring_boots.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "EntityInvoker",
+    "LocalPlayerMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}

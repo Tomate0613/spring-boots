@@ -1,0 +1,10 @@
+{
+  "spring_boots_jump": {
+    "sounds": [
+      "spring_boots:item/spring_boots_1",
+      "spring_boots:item/spring_boots_2",
+      "spring_boots:item/spring_boots_3"
+    ],
+    "subtitle": "subtitles.spring_boots.spring_boots_jump"
+  }
+}
