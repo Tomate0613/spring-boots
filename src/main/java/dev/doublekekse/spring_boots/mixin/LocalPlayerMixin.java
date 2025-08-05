@@ -1,17 +1,13 @@
 package dev.doublekekse.spring_boots.mixin;
 
-import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.authlib.GameProfile;
 import dev.doublekekse.spring_boots.registry.SpringBootsComponents;
 import dev.doublekekse.spring_boots.registry.SpringBootsSoundEvents;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -25,6 +21,11 @@ public abstract class LocalPlayerMixin extends AbstractClientPlayer {
     @Shadow
     public abstract boolean isShiftKeyDown();
 
+    @Unique
+    private int ticksSinceJump;
+    @Unique
+    private boolean wasJumping;
+
     public LocalPlayerMixin(ClientLevel clientLevel, GameProfile gameProfile) {
         super(clientLevel, gameProfile);
     }
@@ -35,6 +36,15 @@ public abstract class LocalPlayerMixin extends AbstractClientPlayer {
 
         if (!boots.has(SpringBootsComponents.SPRING_BOOTS)) {
             return;
+        }
+
+        ticksSinceJump++;
+
+        if (isJumping() && !wasJumping) {
+            ticksSinceJump = 0;
+            wasJumping = true;
+        } else if (!isJumping() && wasJumping) {
+            wasJumping = false;
         }
 
         var delta = getDeltaMovement();
@@ -53,13 +63,14 @@ public abstract class LocalPlayerMixin extends AbstractClientPlayer {
 
     @Unique
     private double multiplier() {
+        if (wasJumping) {
+            return Mth.clampedMap(Math.abs(ticksSinceJump - 2), 0, 40, 1.3, .8);
+        }
+
         if (isShiftKeyDown()) {
             return 0.8;
         }
 
-        if (isJumping()) {
-            return 1.2;
-        }
 
         return 1;
     }

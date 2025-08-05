@@ -3,6 +3,7 @@
 ![A player jumping around using spring boots](https://cdn.modrinth.com/data/IzjOs40e/images/81ce28ac23a9a6f5098a0217d106bdf6da1e0f84.webp)
 
 Adds spring boots to the game. They allow you to jump around.
+Jump strength will depend on timing of the jump key (Try hitting the key right before touching the ground).
 
 <a href="/mod/fabric-api">
   <img alt="Requires FabricApi" src="https://tomate-api.vercel.app/api/dependency?mod=fabric-api&color=38342a">
