@@ -13,9 +13,6 @@
     "fabric-datagen": [
       "dev.doublekekse.spring_boots.client.SpringBootsDataGenerator"
     ],
-    "client": [
-      "dev.doublekekse.spring_boots.client.SpringBootsClient"
-    ],
     "main": [
       "dev.doublekekse.spring_boots.SpringBoots"
     ]
