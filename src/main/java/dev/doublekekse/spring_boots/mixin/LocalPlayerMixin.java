@@ -52,9 +52,9 @@ public abstract class LocalPlayerMixin extends AbstractClientPlayer {
         var collision = ((EntityInvoker) this).invokeCollide(delta);
 
         if (delta.y != collision.y) {
-            var apply = new Vec3(0, -2 * delta.y * multiplier(), 0);
+            var apply = new Vec3(0, -2 * delta.y * multiplier(-delta.y), 0);
 
-            if (apply.y > 0.3) {
+            if (apply.y > 0.2 || wasJumping) {
                 addDeltaMovement(apply);
                 playSound(SpringBootsSoundEvents.SPRING_BOOTS_JUMP, (float) Math.min(apply.y * .2f, 2), (float) (1 + ((apply.y - .2) * 0.01)));
             }
@@ -62,16 +62,20 @@ public abstract class LocalPlayerMixin extends AbstractClientPlayer {
     }
 
     @Unique
-    private double multiplier() {
+    private double multiplier(double speed) {
         if (wasJumping) {
             return Mth.clampedMap(Math.abs(ticksSinceJump - 2), 0, 40, 1.3, .8);
         }
 
         if (isShiftKeyDown()) {
-            return 0.8;
+            return speed < .5 ? .2 : 0.75;
         }
 
 
-        return 1;
+        if(speed > 1) {
+            return .95;
+        }
+
+        return speed < .5 ? .8 : .9;
     }
 }
