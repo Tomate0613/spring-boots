@@ -1,0 +1,15 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "#",
+        "I"
+    ],
+    "key": {
+        "#": "minecraft:leather_boots",
+        "I": "minecraft:iron_nugget"
+    },
+    "result": {
+        "id": "spring_boots:spring_boots",
+        "count": 1
+    }
+}
